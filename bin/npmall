@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+// setup
+var _           = require('underscore'),
+    npmall      = require('../index'),
+    args        = process.argv.slice(2),
+    packages    = npmall();
+
+if (args.length){
+    var i = 0;
+    packages = _.filter(packages, function(package){
+        if (package.name){
+            i++;
+            if (args[0].match(/\*/)){
+                var re = new RegExp('^' + args[0].replace(/\*/g, '.*') + '$', 'i');
+                return package.name.match(re);
+            } else {
+                return package.name.toLowerCase() === args[0].toLowerCase();
+            }
+        }
+    });
+}
+
+// filter
+var names = _.map(packages, function(package){
+    return package.name;
+});
+
+if (names.length){
+    console.log(names.join('\n'));
+}
+

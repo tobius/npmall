@@ -6,36 +6,44 @@ var _           = require('underscore'),
 /**
  * get a list of all public npm package names
  *
- * @param {Void}
- * @return {Array} names
+ * @param {String} [name] (default=all)
+ * @return {Array} names (null on failure)
  */
-var npmall = function(){
+var npmall = function(name){
 
-    var path = '/tmp/npmall.json';
+    var path = '/tmp/';
     var url = 'https://registry.npmjs.org/-/all';
-    var names = null;
+    var packages = null;
+    var name = name || null;
 
-    if (!fs.existsSync(path)){
+    if (!fs.existsSync(path + 'npmall.json')){
 
         // download names
         var body = request('GET', url).getBody();
         var json = JSON.parse(body);
-        var names = _.map(json, function(val, key){
-            return key;
+        var data = _.map(json, function(val){
+            return val;
         });
+        packages = {data: data};
 
         // save names
-        fs.writeFileSync(path, JSON.stringify(names), 'utf8');
+        fs.writeFileSync(path + 'npmall.json', JSON.stringify(packages), 'utf8');
 
     } else {
 
         // read names
-        names = JSON.parse(fs.readFileSync(path, 'utf8'));
+        var json = JSON.parse(fs.readFileSync(path + 'npmall.json', 'utf8'));
+        packages = json;
 
     }
 
-    // done
-    return names;
+    // some data
+    if (name){
+        return _.where(packages.data, { name: name });
+    }
+
+    // all data
+    return packages.data;
 
 };
 

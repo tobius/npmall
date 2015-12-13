@@ -1,0 +1,32 @@
+{
+  "name": "npmall",
+  "version": "0.1.0",
+  "description": "Get a list of all public NPM package names",
+  "main": "index.js",
+  "dependencies": {
+    "json-query": "^1.5.0",
+    "sync-request": "^2.1.0",
+    "underscore": "^1.8.3"
+  },
+  "bin": {
+    "npmall": "./bin/npmall"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tobius/npmall.git"
+  },
+  "keywords": [
+    "npm",
+    "search"
+  ],
+  "author": "Toby Miller <tobius.miller@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tobius/npmall/issues"
+  },
+  "homepage": "https://github.com/tobius/npmall#readme"
+}

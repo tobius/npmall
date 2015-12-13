@@ -1,13 +1,10 @@
 
 # npmall
 
-Get a list of all public NPM package names.
+Get a list of all of the public NPM package names.
 
-I needed to pull a list of all of the npm package names and I needed it to be
-faster than `npm search`. This pulls the JSON down from npmjs.org and stores
-it in `/tmp` for future reuse.
-
-In the future I'll add file rolling and time diff setting controls.
+If you need to get a list of all of the public NPM package names and don't want
+to wait for `npm search` to time out then you may find this package useful.
 
 ## Setup
 
@@ -17,15 +14,21 @@ In the future I'll add file rolling and time diff setting controls.
 
 ## CLI Usage
 
+Returns names
+
 ```
 [~] npmall
+[~] npmall express
+[~] npmall express-*
 ```
 
 ## Node Usage
 
+Returns objects
+
 ```
 var npmall = require('npmall');
-console.log(npmall());
+var packages = npmall();
 ```
 
 ## License
